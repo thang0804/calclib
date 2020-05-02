@@ -18,6 +18,9 @@ class Parser:
                 except:
                     expr += self.tokens[i][-1]
                     i += 1
+            elif self.tokens[i][0] == 'SQRT':
+                expr += f'{eval(self.tokens[i][-1])**0.5}'
+                i += 1
             elif self.tokens[i][0] == 'OP' or self.tokens[i][0] == 'LPARENT' or self.tokens[i][0] == 'RPARENT':
                 expr += self.tokens[i][-1]
                 i += 1

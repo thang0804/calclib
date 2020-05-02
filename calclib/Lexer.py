@@ -10,6 +10,8 @@ class Lexer:
                 try:
                     if self.tokens[-1][0] == 'INT' or self.tokens[-1][0] == 'FLOAT':
                         self.tokens[-1][-1] += tok
+                    elif self.tokens[-1][0] == 'POW':
+                        self.tokens[-1][-1] += f'{tok}'
                     else:
                         self.tokens.append(['INT', tok])
                 except:
@@ -19,6 +21,8 @@ class Lexer:
                     if self.tokens[-1][0] == 'INT':
                         self.tokens[-1][0] = 'FLOAT'
                         self.tokens[-1][-1] += tok
+                    elif self.tokens[-1][0] == 'POW':
+                        self.tokens[-1][-1] += f'{tok}'
                     elif self.token[-1][0] == 'FLOAT':
                         # Raise some error
                         pass
@@ -26,6 +30,8 @@ class Lexer:
                         self.tokens.append(['FLOAT', '0.'])
                 except:
                     self.tokens.append(['FLOAT', '0.'])
+            elif tok == '^':
+                self.tokens.append(['POW', ''])
             elif tok in '+-*/%':
                 self.tokens.append(['OP', tok])
             elif tok == '(':

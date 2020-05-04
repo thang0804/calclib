@@ -1,7 +1,7 @@
 # Calclib
 ### Thư viện tính toán cho python. Giúp các phép tính đi xa hơn, dễ sử dụng hơn
 * Build v0.0.1
-  * Cập nhật '^' và 'sqrt' cho việc tính căn thức
+  * Cập nhật 'sqrt' cho việc tính căn thức
 
 ***
 * ## Cách sử dụng

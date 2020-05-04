@@ -3,7 +3,7 @@
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
 * #### Build v0.0.11
   * Cập nhật 'sin', 'cos', 'tan' cho việc tính lượng giác
-  * Cập nhật chế độ đơn vị đo góc 'degree'(độ) và 'radian'(rad)
+  * Cập nhật chế độ [đơn vị đo góc](https://github.com/thang0804/calclib#đơn-vị-đo-góc) 'degree' (độ) và 'radian' (rad)
 * Build v0.0.1
   * Cập nhật 'sqrt' cho việc tính căn thức
 ***

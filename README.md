@@ -1,5 +1,6 @@
 # Calclib
-### Thư viện tính toán cho python. Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
+### Thư viện tính toán cho python
+### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
 * #### Build v0.0.11
   * Cập nhật 'sin', 'cos', 'tan' cho việc tính lượng giác
   * Cập nhật chế độ đơn vị đo góc 'degree'(độ) và 'radian'(rad)

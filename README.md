@@ -19,3 +19,10 @@ Output sẽ là:
 ```
 9.3245553203
 ```
+* ## Các phép tính có sẵn
+```
+Các phép tính cơ bản: +, -, *, /
+Chia lấy phần dư: % (Ví dụ: 3%2 = 1 [1 là số sư của phép tính])
+Phép lũy thừa: ^ (Ví dụ: 2^3 = 8)
+Phép tính căn bậc 2: sqrt(x) hoặc SQRT(x) (Ví dụ: sqrt(16) = 4)
+```

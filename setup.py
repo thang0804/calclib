@@ -3,10 +3,10 @@ import setuptools
 # Setup file for calclib
 setuptools.setup(
     name="calclib",
-    version="0.0.1",
+    version="0.0.11",
     author="PyNone Team",
     author_email="pydevmonkey4002@gmail.com",
-    description="calclib an calculator engine for GUI calculator",
+    description="calclib an calculator engine for GUI or Console calculator",
     url="https://github.com/thang0804/calclib",
     packages=setuptools.find_packages(),
     classifiers=[

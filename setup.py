@@ -1,5 +1,6 @@
 import setuptools
 
+# Setup file for calclib
 setuptools.setup(
     name="calclib",
     version="0.0.1",

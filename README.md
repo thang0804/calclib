@@ -41,6 +41,21 @@ Các phép tính cơ bản: +, -, *, /
 Chia lấy phần dư: % (Ví dụ: 3%2 = 1 [1 là số sư của phép tính])
 Phép lũy thừa: ^ (Ví dụ: 2^3 = 8)
 Phép tính căn bậc 2: sqrt(x) hoặc SQRT(x) (Ví dụ: sqrt(16) = 4)
+Biểu thức lượng giác sin, cos, tan: sin(x), cos(x), tan(x)
+```
+
+* ## Config đơn vị đo góc
+* calclib có 2 đơn vị đo góc là 'degree' (đơn vị đo độ) và 'radian' (đơn vị đo radian)
+```python
+...
+lexer.angle = 'degree'
+...
+```
+Hoặc
+```python
+...
+lexer.angle = 'radian'
+...
 ```
 
 # Lưu ý

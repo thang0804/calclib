@@ -68,3 +68,4 @@ lexer.angle = 'radian'
 Ví dụ:
 Phép tính: 6^2+8-3 thay vì: 6 ^ 2 + 8 - 3
 ```
+* #### Các bản Build chỉ là các bản thử nghiệm nên còn nhiều bugs, bugs sẽ được fix dần cho đến khi release

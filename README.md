@@ -1,5 +1,8 @@
 # Calclib
 ### Thư viện tính toán cho python. Giúp các phép tính đi xa hơn, dễ sử dụng hơn
+* #### Build v0.0.11
+  * Cập nhật 'sin', 'cos', 'tan' cho việc tính lượng giác
+  * Cập nhật chế độ đơn vị đo góc 'degree'(độ) và 'radian'(rad)
 * Build v0.0.1
   * Cập nhật 'sqrt' cho việc tính căn thức
 ***

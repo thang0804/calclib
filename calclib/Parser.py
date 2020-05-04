@@ -1,3 +1,5 @@
+import math
+
 class Parser:
     def TryParse(self, tokens):
         # initialize
@@ -18,8 +20,19 @@ class Parser:
                 except:
                     expr += self.tokens[i][-1]
                     i += 1
+            # thực hiện tính toán căn thức và đưa kết quả thêm vào "expr"
             elif self.tokens[i][0] == 'SQRT':
                 expr += f'{eval(self.tokens[i][-1])**0.5}'
+                i += 1
+            # thực hiện tính toán sin và đưa kết quả thêm vào "expr"
+            elif self.tokens[i][0] == 'SIN':
+                expr += f'{math.sin(eval(self.tokens[i][-1]))}'
+                i += 1
+            elif self.tokens[i][0] == 'COS':
+                expr += f'{math.cos(eval(self.tokens[i][-1]))}'
+                i += 1
+            elif self.tokens[i][0] == 'TAN':
+                expr += f'{math.tan(eval(self.tokens[i][-1]))}'
                 i += 1
             elif self.tokens[i][0] == 'OP' or self.tokens[i][0] == 'LPARENT' or self.tokens[i][0] == 'RPARENT':
                 expr += self.tokens[i][-1]

@@ -26,3 +26,10 @@ Chia lấy phần dư: % (Ví dụ: 3%2 = 1 [1 là số sư của phép tính])
 Phép lũy thừa: ^ (Ví dụ: 2^3 = 8)
 Phép tính căn bậc 2: sqrt(x) hoặc SQRT(x) (Ví dụ: sqrt(16) = 4)
 ```
+
+# Lưu ý
+* Khi sử dụng calclib nên hạn chế việc sử dụng dấu cách ' '.
+```
+Ví dụ:
+Phép tính: 6^2+8-3 thay vì: 6 ^ 2 + 8 - 3
+```

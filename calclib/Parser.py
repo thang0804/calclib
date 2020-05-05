@@ -1,4 +1,4 @@
-import math
+import math, sys
 
 class Parser:
     def TryParse(self, tokens):
@@ -37,11 +37,16 @@ class Parser:
             elif self.tokens[i][0] == 'OP' or self.tokens[i][0] == 'LPARENT' or self.tokens[i][0] == 'RPARENT':
                 expr += self.tokens[i][-1]
                 i += 1
-            else:
+            elif self.tokens[i][0] == 'WHITESPACE':
+                expr += ' '
                 i += 1
+        sys.tracebacklimit = 0
         expr = str(eval(expr))
         # nếu giá trị trả về là *.0 thì bỏ .0 và để parser trả về kiểu int thay vì *.0(float)
         if expr.endswith('.0'):
             expr = expr.replace('.0', '')
         # trả về kết quả đã làm tròn
-        return round(eval(expr), 10)
+        try:
+            return round(eval(expr), 10)
+        except Exception as e:
+            raise e

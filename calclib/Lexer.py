@@ -1,4 +1,4 @@
-import re, math
+import re, math, sys
 from . import CalclibException
 
 class Lexer:
@@ -7,88 +7,98 @@ class Lexer:
         # initialize
         self.tokens = []
     def GetTokens(self, text):
+        if self.angle != 'degree' and self.angle != 'radian':
+            raise CalclibException.AngleUnitError(f"no angle unit named '{self.angle}'")
         self.text = text
-        tok = ''
-        # bắt đầu lấy tokens
+        self.tok = ''
+        # bắt đầu lấy self.tokens
         for char in self.text:
-            tok += char
-            # thêm tokens nếu xuất hiện int
-            if re.match('[0-9]', tok):
+            self.tok += char
+            # thêm self.tokens nếu xuất hiện int
+            if re.match('[0-9]', self.tok):
                 try:
                     if self.tokens[-1][0] == 'INT' or self.tokens[-1][0] == 'FLOAT':
-                        self.tokens[-1][-1] += tok
+                        self.tokens[-1][-1] += self.tok
                     elif self.tokens[-1][0] == 'POW':
-                        self.tokens[-1][-1] += f'{tok}'
+                        self.tokens[-1][-1] += f'{self.tok}'
                     elif self.tokens[-1][0] == 'SQRT'  and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
-                        self.tokens[-1][-1] += tok
+                        self.tokens[-1][-1] += self.tok
                     else:
-                        self.tokens.append(['INT', tok])
-                    tok = ''
+                        self.tokens.append(['INT', self.tok])
+                    self.tok = ''
                 except:
-                    self.tokens.append(['INT', tok])
-                    tok = ''
+                    self.tokens.append(['INT', self.tok])
+                    self.tok = ''
             # dấu '.' dùng để phát hiện float
-            elif tok == '.':
+            elif self.tok == '.':
                 try:
                     if self.tokens[-1][0] == 'INT':
                         self.tokens[-1][0] = 'FLOAT'
-                        self.tokens[-1][-1] += tok
+                        self.tokens[-1][-1] += self.tok
                     elif self.tokens[-1][0] == 'POW':
-                        self.tokens[-1][-1] += f'{tok}'
+                        self.tokens[-1][-1] += f'{self.tok}'
                     elif self.tokens[-1][0] == 'SQRT'  and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
-                        self.tokens[-1][-1] += tok
+                        self.tokens[-1][-1] += self.tok
                     else:
-                        self.tokens.append(['FLOAT', '0.'])
-                    tok = ''
+                        self.tokens.append(['FLOAT', '.'])
+                    self.tok = ''
                 except:
-                    self.tokens.append(['FLOAT', '0.'])
-                    tok = ''
-            # tokens dùng cho số mũ
-            elif tok == '^':
+                    self.tokens.append(['FLOAT', '.'])
+                    self.tok = ''
+            # self.tokens dùng cho số mũ
+            elif self.tok == '^':
                 self.tokens.append(['POW', ''])
-                tok = ''
+                self.tok = ''
             # cộng, trừ, nhân, chia...
-            elif tok in '+-*/%':
+            elif self.tok in '+-*/%':
                 if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
-                    self.tokens[-1][-1] += tok
+                    self.tokens[-1][-1] += self.tok
                 else:
-                    self.tokens.append(['OP', tok])
-                tok = ''
-            elif tok == '(':
-                if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
-                    self.tokens[-1][-1] += tok
-                else:
-                    self.tokens.append(['LPARENT', tok])
-                tok = ''
-            elif tok == ')':
-                if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
-                    self.tokens[-1][-1] += tok
-                    if self.tokens[-1][0] == 'SIN' or self.tokens[-1][0] == 'COS' or self.tokens[-1][0] == 'TAN':
-                        if self.angle == 'degree':
-                            self.tokens[-1][-1] = f'{(eval(self.tokens[-1][-1])*math.pi)/180}'
-                        elif self.angle != 'radian':
-                            raise CalclibException.AngleUnitError("no angle unit named ", unit=self.angle)
-                else:
-                    self.tokens.append(['RPARENT', tok])
-                tok = ''
+                    self.tokens.append(['OP', self.tok])
+                self.tok = ''
+            elif self.tok == '(' or self.tok == '[' or self.tok == '{':
+                self.__checkBeginBuiltin()
+                self.tok = ''
+            elif self.tok == ')' or self.tok == ']' or self.tok == '}':
+                self.__checkEndBuiltin()
+                self.tok = ''
             # dùng cho hàm căn bậc 2
-            elif tok == 'sqrt' or tok == 'SQRT':
+            elif self.tok == 'sqrt' or self.tok == 'SQRT':
                 self.tokens.append(['SQRT', ''])
-                tok = ''
+                self.tok = ''
             # dùng cho sin
-            elif tok == 'sin' or tok == 'SIN':
+            elif self.tok == 'sin' or self.tok == 'SIN':
                 self.tokens.append(['SIN', ''])
-                tok = ''
+                self.tok = ''
             # dùng cho cos
-            elif tok == 'cos' or tok == 'COS':
+            elif self.tok == 'cos' or self.tok == 'COS':
                 self.tokens.append(['COS', ''])
-                tok = ''
-            elif tok == 'tan' or tok == 'TAN':
+                self.tok = ''
+            elif self.tok == 'tan' or self.tok == 'TAN':
                 self.tokens.append(['TAN', ''])
-                tok = ''
+                self.tok = ''
             # dấu cách
-            elif tok == ' ':
+            elif self.tok == ' ':
                 self.tokens.append(['WHITESPACE'])
-                tok = ''
-        # trả về tokens
+                self.tok = ''
+        # trả về self.tokens
         return self.tokens
+    def __checkBeginBuiltin(self):
+        try:
+            if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
+                self.tokens[-1][-1] += self.tok
+            else:
+                self.tokens.append(['LPARENT', '('])
+        except:
+            self.tokens.append(['LPARENT', '('])
+    def __checkEndBuiltin(self):
+        try:
+            if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
+                self.tokens[-1][-1] += self.tok
+                if self.tokens[-1][0] == 'SIN' or self.tokens[-1][0] == 'COS' or self.tokens[-1][0] == 'TAN':
+                    if self.angle == 'degree':
+                        self.tokens[-1][-1] = f'{(eval(self.tokens[-1][-1])*math.pi)/180}'
+            else:
+                self.tokens.append(['RPARENT', ')'])
+        except:
+            self.tokens.append(['RPARENT', ')'])

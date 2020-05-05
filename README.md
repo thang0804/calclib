@@ -1,14 +1,14 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
-* #### Build v0.0.13
+* #### Build v0.0.14
+  * Cập nhật '[]' và '{}' cho để sử dụng nhiều ngoặc để phép tính dễ nhìn hơn
+* Build v0.0.13
   * Phát hiện và sửa lỗi
   * Cho phép get nhiều tokens
 * Build v0.0.11
   * Cập nhật 'sin', 'cos', 'tan' cho việc tính lượng giác
   * Cập nhật chế độ [đơn vị đo góc](https://github.com/thang0804/calclib#đơn-vị-đo-góc) 'degree' (độ) và 'radian' (rad)
-* Build v0.0.1
-  * Cập nhật 'sqrt' cho việc tính căn thức
 ***
 * ## Hướng dẫn cài đặt
 1. Bạn phải download `setup.py` hoặc source code
@@ -49,7 +49,11 @@ Các phép tính cơ bản: +, -, *, /
 Chia lấy phần dư: % (Ví dụ: 3%2 = 1 [1 là số sư của phép tính])
 Phép lũy thừa: ^ (Ví dụ: 2^3 = 8)
 Phép tính căn bậc 2: sqrt(x) hoặc SQRT(x) (Ví dụ: sqrt(16) = 4)
+: v0.0.11
 Biểu thức lượng giác sin, cos, tan: sin(x), cos(x), tan(x)
+: v.0.14
+Sử dụng ngoặc vuông và ngoặc nhọn dể phân biệt ngoặc:
+'(((1+2)*3)/4)*5' => '{[(1+2)*3]/4}*5' # Phép tính nhìn dễ dàng hơn
 ```
 
 * ## Đơn vị đo góc

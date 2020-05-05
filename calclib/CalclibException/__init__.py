@@ -1,4 +1,4 @@
-class UnitError(Exception):
+class AngleUnitError(Exception):
     def __init__(self, *args, unit=None):
         self.unit = unit
         if args:

@@ -3,11 +3,11 @@ from . import CalclibException
 
 class Lexer:
     angle = 'degree' # Đơn vị đo góc là 'degree' là default
-    def __init__(self, text):
+    def __init__(self):
         # initialize
-        self.text = text
         self.tokens = []
-    def GetTokens(self):
+    def GetTokens(self, text):
+        self.text = text
         tok = ''
         # bắt đầu lấy tokens
         for char in self.text:
@@ -37,9 +37,6 @@ class Lexer:
                         self.tokens[-1][-1] += f'{tok}'
                     elif self.tokens[-1][0] == 'SQRT'  and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
                         self.tokens[-1][-1] += tok
-                    elif self.token[-1][0] == 'FLOAT':
-                        # Raise some error
-                        pass
                     else:
                         self.tokens.append(['FLOAT', '0.'])
                     tok = ''
@@ -70,7 +67,7 @@ class Lexer:
                         if self.angle == 'degree':
                             self.tokens[-1][-1] = f'{(eval(self.tokens[-1][-1])*math.pi)/180}'
                         elif self.angle != 'radian':
-                            raise CalclibException.UnitError("no angle unit named ", unit=self.angle)
+                            raise CalclibException.AngleUnitError("no angle unit named ", unit=self.angle)
                 else:
                     self.tokens.append(['RPARENT', tok])
                 tok = ''

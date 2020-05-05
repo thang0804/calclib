@@ -1,7 +1,10 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
-* #### Build v0.0.11
+* #### Build v0.0.13
+  * Phát hiện và sửa lỗi
+  * Cho phép get nhiều tokens
+* Build v0.0.11
   * Cập nhật 'sin', 'cos', 'tan' cho việc tính lượng giác
   * Cập nhật chế độ [đơn vị đo góc](https://github.com/thang0804/calclib#đơn-vị-đo-góc) 'degree' (độ) và 'radian' (rad)
 * Build v0.0.1
@@ -28,15 +31,16 @@ python3 setup.py install
 from calclib.Lexer import Lexer
 from calclib.Parser import Parser
 
-lexer = Lexer('1^2+sqrt(20+20)*1+2.2') # Đưa phép tính vào lexer và khởi tạo lexer
+lexer = Lexer('') # Khởi tạo lexer
+lexer.angle = 'degree' # set đơn vị đo góc lad degree
 parser = Parser() # Khởi tạo parser
-tokens = lexer.GetTokens() # Lấy tokens của phép tính
-kq = parser.TryParse(tokens) # Lấy kết quả của phép tính
-print(kq)
+tokens = lexer.GetTokens('1^2+sqrt(20+20)*1+2.2-sin(45+45)') # Lấy tokens của phép tính
+result = parser.TryParse(tokens) # Lấy kết quả của phép tính
+print(result)
 ```
 Output sẽ là:
 ```
-9.5245553203
+8.5245553203
 ```
 * ## Các phép tính có sẵn
 ```

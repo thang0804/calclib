@@ -2,7 +2,7 @@
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
 * #### Build v0.0.14
-  * Cập nhật '[]' và '{}' cho để sử dụng nhiều ngoặc để phép tính dễ nhìn hơn
+  * Cập nhật '[]' và '{}' cho để sử dụng nhiều ngoặc để phép tính dễ nhìn hơn. Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
 * Build v0.0.13
   * Phát hiện và sửa lỗi
   * Cho phép get nhiều tokens

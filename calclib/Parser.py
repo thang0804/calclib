@@ -1,7 +1,7 @@
 import math, sys
 
 class Parser:
-    def TryParse(self, tokens):
+    def TryParse(self, tokens:list):
         # initialize
         self.tokens = tokens
         i = 0
@@ -22,10 +22,10 @@ class Parser:
                     i += 1
             # thực hiện tính toán căn thức và đưa kết quả thêm vào "expr"
             elif self.tokens[i][0][-4:] == 'SQRT':
-                if self.tokens[i][0][0].isdigit():
-                    expr += f'{eval(self.tokens[i][-1])**1/int(self.tokens[i][0][0])}'
+                if self.tokens[i][0][0:-4].isnumeric():
+                    expr += f'{eval(self.tokens[i][-1])**(1/eval(self.tokens[i][0][0:-4]))}'
                 else:
-                    expr += f'{eval(self.tokens[i][-1])**1/2}'
+                    expr += f'{eval(self.tokens[i][-1])**(1/2)}'
                 i += 1
             # thực hiện tính toán sin và đưa kết quả thêm vào "expr"
             elif self.tokens[i][0] == 'SIN':

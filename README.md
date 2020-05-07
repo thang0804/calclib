@@ -1,14 +1,14 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
+* #### Build v0.1.2 :
+  * Sửa lỗi và phát hiện bugs
 * Build v0.1.1 :
   * Thêm số lượng biến có thể sử dụng. Xem thêm [Sử dụng biến](https://github.com/thang0804/calclib#sử-dụng-biến)
 * Build v0.1.0 :
   * Cập nhật tạo biến và sử dụng biến. Xem thêm [Sử dụng biến](https://github.com/thang0804/calclib#sử-dụng-biến)
 * Build v0.0.2 :
   * Cập nhật thêm phần 'sqrt', cho phép sử dụng căn bậc 3, 4 .... Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
-* Build v0.0.14 :
-  * Cập nhật '[]' và '{}' cho để sử dụng nhiều ngoặc để phép tính dễ nhìn hơn. Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
 ***
 * ## Hướng dẫn cài đặt
 1. Bạn phải clone `setup.py` từ github:

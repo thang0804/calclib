@@ -30,7 +30,7 @@ python3 setup.py install
 ```python
 from calclib import Lexer, Parser
 
-lexer = Lexer('') # Khởi tạo lexer
+lexer = Lexer() # Khởi tạo lexer
 lexer.angle = 'degree' # set đơn vị đo góc là degree
 parser = Parser() # Khởi tạo parser
 tokens = lexer.GetTokens('1^2+sqrt(20+20)*1+2.2-sin(45+45)') # Lấy tokens của phép tính

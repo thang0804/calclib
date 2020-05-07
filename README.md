@@ -51,11 +51,14 @@ Các phép tính cơ bản: +, -, *, /
 Chia lấy phần dư: % (Ví dụ: 3%2 = 1 [1 là số sư của phép tính])
 Phép lũy thừa: ^ (Ví dụ: 2^3 = 8)
 Phép tính căn bậc 2: sqrt(x) hoặc SQRT(x) (Ví dụ: sqrt(16) = 4)
+
 : v0.0.11
 Biểu thức lượng giác sin, cos, tan: sin(x), cos(x), tan(x)
+
 : v.0.14
 Sử dụng ngoặc vuông và ngoặc nhọn dể phân biệt ngoặc:
 '(((1+2)*3)/4)*5' => '{[(1+2)*3]/4}*5' # Phép tính nhìn dễ dàng hơn
+
 : v0.0.2
 Để tính toán căn thức bậc cao hơn sử dụng: <số mũ>sqrt(x) (Ví dụ: 3sqrt(27) = 3, 4sqrt(16) = 2)
 ```

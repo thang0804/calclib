@@ -1,11 +1,11 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
-* #### Build v0.1.3 :
+* #### Build v0.1.4 :
+  * Cập nhật tính giai thừa sử dụng '!'. Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
+* Build v0.1.3 :
   * Cho phép get nhiều tokens
   * Fix 1 số bugs
-* Build v0.1.2 :
-  * Sửa lỗi và phát hiện bugs
 * Build v0.1.1 :
   * Thêm số lượng biến có thể sử dụng. Xem thêm [Sử dụng biến](https://github.com/thang0804/calclib#sử-dụng-biến)
 * Build v0.1.0 :
@@ -61,6 +61,9 @@ Sử dụng ngoặc vuông và ngoặc nhọn dể phân biệt ngoặc:
 
 : v0.0.2
 Để tính toán căn thức bậc cao hơn sử dụng: <số mũ>sqrt(x) (Ví dụ: 3sqrt(27) = 3, 4sqrt(16) = 2)
+
+: v0.1.4
+Để tính toán giai thừa ta dùng: <số giai thừa>! (VD: 8! = 40320)
 ```
 
 * ## Đơn vị đo góc

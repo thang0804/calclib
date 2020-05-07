@@ -1,7 +1,9 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
-* #### Build v0.0.14
+* #### Build v0.0.2
+  * Cập nhật thêm phần 'sqrt', cho phép sử dụng căn bậc 3, 4 .... Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
+* Build v0.0.14
   * Cập nhật '[]' và '{}' cho để sử dụng nhiều ngoặc để phép tính dễ nhìn hơn. Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
 * Build v0.0.13
   * Phát hiện và sửa lỗi
@@ -54,6 +56,8 @@ Biểu thức lượng giác sin, cos, tan: sin(x), cos(x), tan(x)
 : v.0.14
 Sử dụng ngoặc vuông và ngoặc nhọn dể phân biệt ngoặc:
 '(((1+2)*3)/4)*5' => '{[(1+2)*3]/4}*5' # Phép tính nhìn dễ dàng hơn
+: v0.0.2
+Để tính toán căn thức bậc cao hơn sử dụng: <số mũ>sqrt(x) (Ví dụ: 3sqrt(27) = 3, 4sqrt(16) = 2)
 ```
 
 * ## Đơn vị đo góc

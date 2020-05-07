@@ -6,13 +6,13 @@ class Lexer:
     def __init__(self):
         # initialize
         self.tokens = []
-    def GetTokens(self, text):
+    def GetTokens(self, exp):
         if self.angle != 'degree' and self.angle != 'radian':
             raise CalclibException.AngleUnitError(f"no angle unit named '{self.angle}'")
-        self.text = text
+        self.exp = exp
         self.tok = ''
         # bắt đầu lấy self.tokens
-        for char in self.text:
+        for char in self.exp:
             self.tok += char
             # thêm self.tokens nếu xuất hiện int
             if re.match('[0-9]', self.tok):

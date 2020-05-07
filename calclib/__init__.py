@@ -1,17 +1,17 @@
-import math
+import math, sys
 from . import CalclibException
 
 class Lexer:
     angle = 'degree' # Đơn vị đo góc là 'degree' là default
     def __init__(self):
         # initialize
-        self.tokens = []
         self.__variable = {}
         self.__createVarData()
     def GetTokens(self, exp:str):
         if self.angle != 'degree' and self.angle != 'radian':
             raise CalclibException.AngleUnitError(f"no angle unit named '{self.angle}'")
         self.exp = exp
+        self.tokens = []
         self.tok = ''
         # bắt đầu lấy self.tokens
         for char in self.exp:
@@ -46,6 +46,17 @@ class Lexer:
                     self.tok = ''
                 except:
                     self.tokens.append(['FLOAT', '.'])
+                    self.tok = ''
+            # dấu '!' cho factorial
+            elif self.tok == '!':
+                try:
+                    if self.tokens[-1][0] == 'INT':
+                        self.tokens[-1][0] = 'FACTORIAL'
+                        self.tok = ''
+                    elif self.tokens[-1][0] == 'FLOAT':
+                        raise CalclibException.MathError(errorcode="FactorialError")
+                except:
+                    self.tokens.append(['FACTORIAL', '!'])
                     self.tok = ''
             # self.tokens dùng cho số mũ
             elif self.tok == '^':
@@ -136,8 +147,6 @@ class Lexer:
             self.__variable[key] = eval(str(value))
         else:
             raise NameError(f"variable '{key}' does not exists")
-
-import math, sys
 
 class Parser:
     def TryParse(self, tokens:list):

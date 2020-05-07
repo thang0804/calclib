@@ -1,7 +1,10 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
-* #### Build v0.1.2 :
+* #### Build v0.1.3 :
+  * Cho phép get nhiều tokens
+  * Fix 1 số bugs
+* Build v0.1.2 :
   * Sửa lỗi và phát hiện bugs
 * Build v0.1.1 :
   * Thêm số lượng biến có thể sử dụng. Xem thêm [Sử dụng biến](https://github.com/thang0804/calclib#sử-dụng-biến)

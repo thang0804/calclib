@@ -52,9 +52,11 @@ class Lexer:
                 try:
                     if self.tokens[-1][0] == 'INT':
                         self.tokens[-1][0] = 'FACTORIAL'
-                        self.tok = ''
-                    elif self.tokens[-1][0] == 'FLOAT':
-                        raise CalclibException.MathError(errorcode="FactorialError")
+                    else:
+                        raise CalclibException.MathError("factorial value must be an integer")
+                    self.tok = ''
+                except CalclibException.MathError as exception:
+                    raise exception
                 except:
                     self.tokens.append(['FACTORIAL', '!'])
                     self.tok = ''
@@ -188,6 +190,10 @@ class Parser:
             elif self.tokens[i][0] == 'OP' or self.tokens[i][0] == 'LPARENT' or self.tokens[i][0] == 'RPARENT':
                 expr += self.tokens[i][-1] + ' '
                 i += 1
+            # thực hiện tính factorial
+            elif self.tokens[i][0] == 'FACTORIAL':
+                expr += f'{self.__factorial(self.tokens[i][-1])} '
+                i += 1
             elif self.tokens[i][0] == 'WHITESPACE':
                 expr += ' '
                 i += 1
@@ -198,6 +204,12 @@ class Parser:
             expr = expr.replace('.0', '')
         # trả về kết quả đã làm tròn
         try:
-            return round(eval(expr), 10)
+            return round(eval(expr), 15)
         except Exception as e:
             raise e
+    
+    def __factorial(self, value):
+        returned = 1
+        for i in range(1, int(value)+1):
+            returned *= i
+        return returned

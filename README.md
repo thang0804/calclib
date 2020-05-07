@@ -28,8 +28,7 @@ python3 setup.py install
 ***
 * ## Cách sử dụng
 ```python
-from calclib.Lexer import Lexer
-from calclib.Parser import Parser
+from calclib import Lexer, Parser
 
 lexer = Lexer('') # Khởi tạo lexer
 lexer.angle = 'degree' # set đơn vị đo góc là degree

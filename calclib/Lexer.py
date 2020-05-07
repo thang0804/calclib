@@ -1,4 +1,4 @@
-import re, math, sys
+import math
 from . import CalclibException
 
 class Lexer:
@@ -17,7 +17,7 @@ class Lexer:
         for char in self.exp:
             self.tok += char
             # thêm self.tokens nếu xuất hiện int
-            if re.match('[0-9]', self.tok):
+            if self.tok.isdigit():
                 try:
                     if self.tokens[-1][0] == 'INT' or self.tokens[-1][0] == 'FLOAT':
                         self.tokens[-1][-1] += self.tok
@@ -87,13 +87,13 @@ class Lexer:
                 self.tokens.append(['TAN', ''])
                 self.tok = ''
             # biến
-            elif self.tok in 'ABCDEFXYM':
+            elif self.tok in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ':
                 if type(self.__variable[self.tok]).__name__ == 'int':
                     self.tokens.append(['INT', str(self.__variable[self.tok])])
                 elif type(self.__variable[self.tok]).__name__ == 'float':
                     self.tokens.append(['FLOAT', str(self.__variable[self.tok])])
-                self.tok = ''
                 self.__lexVarBuiltin()
+                self.tok = ''
             # dấu cách
             elif self.tok == ' ':
                 self.tokens.append(['WHITESPACE'])
@@ -120,12 +120,15 @@ class Lexer:
         except:
             self.tokens.append(['RPARENT', ')'])
     def __lexVarBuiltin(self):
-        if self.tokens[-2][0][-4:] == 'SQRT'  and not self.tokens[-2][-1].endswith(')') or self.tokens[-2][0] == 'SIN' and not self.tokens[-2][-1].endswith(')') or self.tokens[-2][0] == 'COS' and not self.tokens[-2][-1].endswith(')') or self.tokens[-2][0] == 'TAN' and not self.tokens[-2][-1].endswith(')'):
-            if self.tokens[-1][0] == 'INT' or self.tokens[-1][0] == 'FLOAT':
-                self.tokens[-2][-1] += self.tokens[-1][-1]
-                self.tokens.pop(-1)
+        try:
+            if self.tokens[-2][0][-4:] == 'SQRT'  and not self.tokens[-2][-1].endswith(')') or self.tokens[-2][0] == 'SIN' and not self.tokens[-2][-1].endswith(')') or self.tokens[-2][0] == 'COS' and not self.tokens[-2][-1].endswith(')') or self.tokens[-2][0] == 'TAN' and not self.tokens[-2][-1].endswith(')'):
+                if self.tokens[-1][0] == 'INT' or self.tokens[-1][0] == 'FLOAT':
+                    self.tokens[-2][-1] += self.tokens[-1][-1]
+                    self.tokens.pop(-1)
+        except:
+            self.tok = ''
     def __createVarData(self):
-        varName = list('ABCDEFXYM')
+        varName = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
         for var in varName:
             self.__variable[var] = None
     def sto(self, key:str, value:float):

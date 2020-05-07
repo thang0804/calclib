@@ -12,33 +12,33 @@ class Parser:
                 try:
                     # phát hiện số mũ và tính số mũ thành 1 số cho expr
                     if self.tokens[i+1][0] == 'POW':
-                        expr += f'{eval(self.tokens[i][-1])**eval(self.tokens[i+1][-1])}'
+                        expr += f'{eval(self.tokens[i][-1])**eval(self.tokens[i+1][-1])} '
                         i += 2
                     else:
-                        expr += self.tokens[i][-1]
+                        expr += self.tokens[i][-1] + ' '
                         i += 1
                 except:
-                    expr += self.tokens[i][-1]
+                    expr += self.tokens[i][-1] + ' '
                     i += 1
             # thực hiện tính toán căn thức và đưa kết quả thêm vào "expr"
             elif self.tokens[i][0][-4:] == 'SQRT':
                 if self.tokens[i][0][0:-4].isnumeric():
-                    expr += f'{eval(self.tokens[i][-1])**(1/eval(self.tokens[i][0][0:-4]))}'
+                    expr += f'{eval(self.tokens[i][-1])**(1/eval(self.tokens[i][0][0:-4]))} '
                 else:
-                    expr += f'{eval(self.tokens[i][-1])**(1/2)}'
+                    expr += f'{eval(self.tokens[i][-1])**(1/2)} '
                 i += 1
             # thực hiện tính toán sin và đưa kết quả thêm vào "expr"
             elif self.tokens[i][0] == 'SIN':
-                expr += f'{math.sin(eval(self.tokens[i][-1]))}'
+                expr += f'{math.sin(eval(self.tokens[i][-1]))} '
                 i += 1
             elif self.tokens[i][0] == 'COS':
-                expr += f'{math.cos(eval(self.tokens[i][-1]))}'
+                expr += f'{math.cos(eval(self.tokens[i][-1]))} '
                 i += 1
             elif self.tokens[i][0] == 'TAN':
-                expr += f'{math.tan(eval(self.tokens[i][-1]))}'
+                expr += f'{math.tan(eval(self.tokens[i][-1]))} '
                 i += 1
             elif self.tokens[i][0] == 'OP' or self.tokens[i][0] == 'LPARENT' or self.tokens[i][0] == 'RPARENT':
-                expr += self.tokens[i][-1]
+                expr += self.tokens[i][-1] + ' '
                 i += 1
             elif self.tokens[i][0] == 'WHITESPACE':
                 expr += ' '

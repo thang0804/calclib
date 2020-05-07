@@ -21,8 +21,11 @@ class Parser:
                     expr += self.tokens[i][-1]
                     i += 1
             # thực hiện tính toán căn thức và đưa kết quả thêm vào "expr"
-            elif self.tokens[i][0] == 'SQRT':
-                expr += f'{eval(self.tokens[i][-1])**0.5}'
+            elif self.tokens[i][0][-4:] == 'SQRT':
+                if self.tokens[i][0][0].isdigit():
+                    expr += f'{eval(self.tokens[i][-1])**1/int(self.tokens[i][0][0])}'
+                else:
+                    expr += f'{eval(self.tokens[i][-1])**1/2}'
                 i += 1
             # thực hiện tính toán sin và đưa kết quả thêm vào "expr"
             elif self.tokens[i][0] == 'SIN':

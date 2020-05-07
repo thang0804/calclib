@@ -21,7 +21,7 @@ class Lexer:
                         self.tokens[-1][-1] += self.tok
                     elif self.tokens[-1][0] == 'POW':
                         self.tokens[-1][-1] += f'{self.tok}'
-                    elif self.tokens[-1][0] == 'SQRT'  and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
+                    elif self.tokens[-1][0][-4:] == 'SQRT'  and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
                         self.tokens[-1][-1] += self.tok
                     else:
                         self.tokens.append(['INT', self.tok])
@@ -37,7 +37,7 @@ class Lexer:
                         self.tokens[-1][-1] += self.tok
                     elif self.tokens[-1][0] == 'POW':
                         self.tokens[-1][-1] += f'{self.tok}'
-                    elif self.tokens[-1][0] == 'SQRT'  and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
+                    elif self.tokens[-1][0][-4:] == 'SQRT'  and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
                         self.tokens[-1][-1] += self.tok
                     else:
                         self.tokens.append(['FLOAT', '.'])
@@ -51,7 +51,7 @@ class Lexer:
                 self.tok = ''
             # cộng, trừ, nhân, chia...
             elif self.tok in '+-*/%':
-                if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
+                if self.tokens[-1][0][-4:] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
                     self.tokens[-1][-1] += self.tok
                 else:
                     self.tokens.append(['OP', self.tok])
@@ -64,7 +64,11 @@ class Lexer:
                 self.tok = ''
             # dùng cho hàm căn bậc 2
             elif self.tok == 'sqrt' or self.tok == 'SQRT':
-                self.tokens.append(['SQRT', ''])
+                if self.tokens[-1][0] == 'INT':
+                    self.tokens.append([f'{self.tokens[-1][-1]}SQRT', ''])
+                    self.tokens.pop(-2)
+                else:
+                    self.tokens.append(['SQRT', ''])
                 self.tok = ''
             # dùng cho sin
             elif self.tok == 'sin' or self.tok == 'SIN':
@@ -81,11 +85,11 @@ class Lexer:
             elif self.tok == ' ':
                 self.tokens.append(['WHITESPACE'])
                 self.tok = ''
-        # trả về self.tokens
+        # trả về tokens
         return self.tokens
     def __checkBeginBuiltin(self):
         try:
-            if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
+            if self.tokens[-1][0][-4:] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
                 self.tokens[-1][-1] += self.tok
             else:
                 self.tokens.append(['LPARENT', '('])
@@ -93,7 +97,7 @@ class Lexer:
             self.tokens.append(['LPARENT', '('])
     def __checkEndBuiltin(self):
         try:
-            if self.tokens[-1][0] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
+            if self.tokens[-1][0][-4:] == 'SQRT' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'SIN' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'COS' and not self.tokens[-1][-1].endswith(')') or self.tokens[-1][0] == 'TAN' and not self.tokens[-1][-1].endswith(')'):
                 self.tokens[-1][-1] += self.tok
                 if self.tokens[-1][0] == 'SIN' or self.tokens[-1][0] == 'COS' or self.tokens[-1][0] == 'TAN':
                     if self.angle == 'degree':

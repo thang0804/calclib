@@ -1,7 +1,7 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
-* #### Build v0.1.5 (Read changelog [here](https://github.com/thang0804/calclib)):
+* #### Build v0.1.5 (Read changelog [here](https://github.com/thang0804/calclib#015-changelog)):
   * Thay đổi tên phương thức 'GetTokens' thành 'tokenize'
   * Cập nhật tính giá trị tuyệt đối của 1 số hoặc 1 biến
 * Build v0.1.4 :

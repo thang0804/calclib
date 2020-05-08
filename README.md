@@ -1,7 +1,10 @@
 # Calclib
 ### Thư viện tính toán cho python
 ### Bộ công cụ tính toán dễ dàng mà không cần quá nhiều đến thuật toán
-* #### Build v0.1.4 :
+* #### Build v0.1.5 (Read changelog [here](https://github.com/thang0804/calclib)):
+  * Thay đổi tên phương thức 'GetTokens' thành 'tokenize'
+  * Cập nhật tính giá trị tuyệt đối của 1 số hoặc 1 biến
+* Build v0.1.4 :
   * Cập nhật tính giai thừa sử dụng '!'. Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
 * Build v0.1.3 :
   * Cho phép get nhiều tokens
@@ -12,6 +15,29 @@
   * Cập nhật tạo biến và sử dụng biến. Xem thêm [Sử dụng biến](https://github.com/thang0804/calclib#sử-dụng-biến)
 * Build v0.0.2 :
   * Cập nhật thêm phần 'sqrt', cho phép sử dụng căn bậc 3, 4 .... Xem thêm [Các phép tính có sẵn](https://github.com/thang0804/calclib#các-phép-tính-có-sẵn)
+***
+* ## 0.1.5 Changelog
+  * #### Thay đổi tên phương thức
+    * Bắt đầu từ bản 0.1.5 trở đi, phương thức 'GetTokens' sẽ trở thành phương thức 'tokenize'
+  * #### Giá trị tuyệt đối
+    * Giá trị tuyệt đối được sử dụng bằng cách sử dụng abs() hoặc 2 dấu ||:
+    ```python
+    ...
+    tokens = lexer.tokenize('|-2|') # Hoặc có thể là lexer.tokenize('abs(-2)')
+    ...
+    ```
+    Lưu ý sử dụng giá trị tuyệt đối
+    ```python
+    ...
+    tokens = lexer.tokenize('abs((1+1)*-2)') # Cách sử dụng này sẽ làm lexer hiểu nhầm và báo lỗi
+    ...
+    ```
+    Thay vào đó ta sử dụng
+    ```python
+    ...
+    tokens = lexer.tokenize('|(1+1)*-2|') # Phép tính này cho ra kết quả là 4
+    ...
+    ```
 ***
 * ## Hướng dẫn cài đặt
 1. Bạn phải clone `setup.py` từ github:
@@ -36,7 +62,7 @@ from calclib import Lexer, Parser
 lexer = Lexer() # Khởi tạo lexer
 lexer.angle = 'degree' # set đơn vị đo góc là degree ('degree' là default)
 parser = Parser() # Khởi tạo parser
-tokens = lexer.GetTokens('1^2+sqrt(20+20)*1+2.2-sin(45+45)') # Lấy tokens của phép tính
+tokens = lexer.tokenize('1^2+sqrt(20+20)*1+2.2-sin(45+45)') # Lấy tokens của phép tính
 result = parser.TryParse(tokens) # Lấy kết quả của phép tính
 print(result)
 ```
@@ -64,6 +90,11 @@ Sử dụng ngoặc vuông và ngoặc nhọn dể phân biệt ngoặc:
 
 : v0.1.4
 Để tính toán giai thừa ta dùng: <số giai thừa>! (VD: 8! = 40320)
+
+: v0.1.5
+Để tính giá trị tuyệt đối của 1 số ta dùng abs() hoặc ||
+abs(-2) = |-2| = 2
+LƯU Ý: builtin abs() sẽ không được sử dụng các dấu ngoặc ở trong, nếu muốn dùng các dấu ngoặc ở trong thì phải dùng trong ||
 ```
 
 * ## Đơn vị đo góc
